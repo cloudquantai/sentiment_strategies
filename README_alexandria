@@ -11,9 +11,7 @@ The sentiment stream needs to be initialized as a function:
 
 Queries over longer periods of time, prior to the start of the stock market day, can be made in on_start and on_strategy_start
 
-data = service.query_data('!sentiment/alexandria', self.symbol,
-                                  start_timestamp=md.market_open_time - service.time_interval(
-                                      hours=sentiment_hours_prior))
+data = service.query_data('!sentiment/alexandria', self.symbol,start_timestamp=md.market_open_time - service.time_interval(hours=sentiment_hours_prior))
 Score = 0
 for item in data:
     if item['Relevance'] > .3:  
