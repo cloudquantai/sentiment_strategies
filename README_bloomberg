@@ -28,8 +28,8 @@ surrounding a particular stock in the time leading up to market open.
 The sentiment of a particular stock is updated by a running total, that begins after the initial call and is updated each time 
 a sentiment event occurs.
 
-def on_stocktwits(self, event, md, order, service, account): 
-        if event.field['sentiment_score']!=0:
-            self.st_value+=event.field['sentiment_score']
+def on_bloomberg_news(self, event, md, order, service, account):
+    if event.field['Score'] != 0:
+        self.bb_value += (event.field['Score'] * (event.field['Confidence']))
 
 The value self.bb_value is a consistently updated value that represents the current net bloomberg sentiment for a stock.
