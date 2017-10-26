@@ -1,5 +1,3 @@
-# sentiment_strategies
-
 Stock sentiment represents the attitude or opinions people hold of a particular stock. Since bullish or bearish sentiment will 
 certainly affect a stock’s price and trends, traders have developed different ways of creating a numerical index that represents 
 public sentiment towards a stock to improve their trading algorithms. There are many different ways to calculate this number, 
