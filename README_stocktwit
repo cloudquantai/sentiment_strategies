@@ -1,1 +1,34 @@
-This demonstrates how to access stock twit data in the cloudquant environment
+Stock twits are a financially-themed social media platform, and the stock twit sentiment scores stem directly from this platform. 
+It will tend to have a much higher volume of comments and sentiment updates, but with a smaller impact that more traditional news 
+articles. You can read more about stock twits here: 
+https://blog.stocktwits.com/staring-into-the-abyss-with-the-stocktwits-sentiment-screener-d7b04f3ee613
+The Stock Twit data simply includes a sentiment score of a decimal value between -1 and +1, with -1 being the worst possible 
+sentiment score and +1 being the best.
+
+The sentiment stream needs to be initialized as a function:
+@classmethod
+    def register_event_streams(cls, md, service, account):
+        return {'!sentiment/stocktwits': 'on_stocktwits'}
+
+Queries over longer periods of time, prior to the start of the stock market day, can be made in on_start and on_strategy_start
+
+data = service.query_data('!sentiment/stocktwits', self.symbol, start_timestamp=md.market_open_time - service.time_interval(hours=sentiment_hours_prior))
+Score = 0
+for item in data:
+    if item['sentiment_score'] != 0:
+        Score += item['sentiment_score']
+self.st_value = Score
+
+In this particular example, Stock Twit data is queried over a certain number of hours (the variable sentiment_hours_prior) before 
+market open. The for loop then loops over all sentiment over those periods and adds them to the self.st_value element, which 
+represents the net sentiment at the market open. You could extend this time further to gain a better idea of the sentiment 
+surrounding a particular stock in the time leading up to market open.
+
+The sentiment of a particular stock is updated by a running total, that begins after the initial call and is updated each time 
+a sentiment event occurs.
+
+def on_stocktwits(self, event, md, order, service, account):
+    if event.field['sentiment_score'] != 0:
+        self.st_value += event.field['sentiment_score']
+
+The value self.st_value is a consistently updated value that represents the current net alexandria sentiment for a stock.
