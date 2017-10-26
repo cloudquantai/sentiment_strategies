@@ -9,7 +9,7 @@ is optional.
 The sentiment stream needs to be initialized as a function:
 @classmethod
     def register_event_streams(cls, md, service, account):
-        return {'!sentiment/bloomberg/story/news': 'on_bloomberg_news'}
+        return {'!sentiment/alexandria': 'on_alexandria_news'}
 
 Queries over longer periods of time, prior to the start of the stock market day, can be made in on_start and on_strategy_start
 
