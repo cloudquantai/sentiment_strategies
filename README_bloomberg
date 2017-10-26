@@ -15,7 +15,9 @@ Queries over longer periods of time, prior to the start of the stock market day,
 
 data = service.query_data('!sentiment/bloomberg/story/news', self.symbol, start_timestamp=md.market_open_time - service.time_interval(hours = sentiment_hours_prior ))
 
-In this particular example, Bloomberg data is queried over a certain number of hours (the variable sentiment_hours_prior) before market open. You could extend this time further to gain a better idea of the sentiment surrounding a particular stock in the time leading up to market open.
+In this particular example, Bloomberg data is queried over a certain number of hours (the variable sentiment_hours_prior) before 
+market open. You could extend this time further to gain a better idea of the sentiment surrounding a particular stock in the time 
+leading up to market open.
 
 The sentiment of a particular stock is updated by a running total, that begins after the initial call and is updated each time a sentiment
 event occurs.
