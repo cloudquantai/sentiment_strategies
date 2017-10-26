@@ -1,4 +1,39 @@
-# sentiment_strategies
-This includes demonstrations of code that will access cloudquant's sentiment repositories
+Bloomberg has created sentiment data based on news stories about companies since 2010. Over time, the data set has been further 
+expanded through the addition of more sources for news stories, other entities, as well as sentiment on social media. The Bloomberg 
+data includes both a sentiment score of -1 or +1 (-1 is bad, and +1 is good) and a confidence value between 1 and 100, where 1 
+means almost no confidence, and 100 means high confidence. For the demo script, the sentiment score and confidence are multiplied 
+to adjust the total confidence score. I divide the final value by 100 to keep the range similar to the other two indices, but this 
+is optional.
 
-This demonstrates calling Alexandria sentiment data in the cloudquant environment.
+
+The sentiment stream needs to be initialized as a function:
+@classmethod
+    def register_event_streams(cls, md, service, account):
+        return {'!sentiment/bloomberg/story/news': 'on_bloomberg_news'}
+
+Queries over longer periods of time, prior to the start of the stock market day, can be made in on_start and on_strategy_start
+
+data = service.query_data('!sentiment/bloomberg/story/news', self.symbol, start_timestamp=md.market_open_time - service.time_interval(hours = sentiment_hours_prior ))
+
+Score = 0
+    for item in data:
+        if item['Score'] != 0:
+            Score += (item['Score'] * (item['Confidence']))
+    self.bb_value = Score
+
+In this particular example, Bloomberg data is queried over a certain number of hours (the variable sentiment_hours_prior) before 
+market open. The for loop then loops over all sentiment over those periods and adds them to the self.bb_value element, which 
+represents the net sentiment at the market open. You could extend this time further to gain a better idea of the sentiment 
+surrounding a particular stock in the time leading up to market open.
+
+The sentiment of a particular stock is updated by a running total, that begins after the initial call and is updated each time 
+a sentiment event occurs.
+
+def on_stocktwits(self, event, md, order, service, account): 
+        if event.field['sentiment_score']!=0:
+            print('Change in %s stock twit sentiment of %.2f' % (self.symbol, event.field['sentiment_score']))
+            self.st_value+=event.field['sentiment_score']
+            print('Current sentiment for %s is %.2f' % (self.symbol, self.st_value))
+
+
+The value self.bb_value is a consistently updated value that represents the current net bloomberg sentiment for a stock.
