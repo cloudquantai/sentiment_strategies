@@ -1,4 +1,4 @@
-# Nick Schmandt (n.schmandt@gmail.com), CloudQuant, 10/23/17
+# Nick Schmandt (nschmandt@cloudquant.com), CloudQuant, 10/23/17
 
 from cloudquant.interfaces import Strategy
 from cloudquant.util import dt_from_muts
