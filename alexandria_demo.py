@@ -1,4 +1,4 @@
-# Nick Schmandt (n.schmandt@gmail.com), CloudQuant, 10/23/17
+# Nick Schmandt (nschmandt@cloudquant.com), CloudQuant, 10/23/17
 
 # This code is designed to run in the cloudquant environment, at https://info.cloudquant.com/
 
