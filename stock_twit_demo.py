@@ -9,7 +9,10 @@ import numpy as np
 
 # you can only query sentiment data over long periods of time in on_start and on_strategy_start.
 
-# not all dates are available. Currently (10/23/17) stock twits only goes from to 8/25/17.
+# sentiment data is only available in the Elite CloudQuant Version, not the Lite.
+
+# not all dates are available. Currently (10/23/17) stock twits only goes from 2011 to 8/25/17, check periodically as 
+# dates are updated.
 
 
 # this value determines how long before market open to look and include sentiment data in the simulation.
