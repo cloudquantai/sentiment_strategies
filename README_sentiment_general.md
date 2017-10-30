@@ -8,6 +8,8 @@ representing investor sentiment that can be used as part of a trading strategy.
 
 Three stock sentiment indices are available in Cloudquant: Stock Twit, Alexandria, and Bloomberg
 
+These are only available in the Elite version, and not the Lite version of CloudQuant.
+
 Stock twits are a financially-themed social media platform, and the stock twit sentiment scores stem directly from this platform. 
 It will tend to have a much higher volume of comments and sentiment updates, but with a smaller impact that more traditional news 
 articles. You can read more about stock twits here: 
