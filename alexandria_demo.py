@@ -2,6 +2,8 @@
 
 # This code is designed to run in the cloudquant environment, at https://info.cloudquant.com/
 
+# Note that sentiment is a feature that is only available in the Elite Version of CloudQuant
+
 from cloudquant.interfaces import Strategy
 from cloudquant.util import dt_from_muts
 import numpy as np
