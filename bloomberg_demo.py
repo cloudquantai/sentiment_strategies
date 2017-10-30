@@ -9,7 +9,9 @@ import numpy as np
 
 # you can only query sentiment data over long periods of time in on_start and on_strategy_start.
 
-# bloomberg data runs from
+# bloomberg data currently only runs from April 2017, this bug should be fixed soon.
+
+# Sentiment data is only available in the Elite version of Cloudquant, not the Lite.
 
 
 # this value determines how long before market open to look and include sentiment data in the simulation.
